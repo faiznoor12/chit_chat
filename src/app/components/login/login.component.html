@@ -1,0 +1,61 @@
+<div
+  class="grid w-screen h-screen text-white bg-black bg-no-repeat bg-cover place-items-center"
+  style="background: url(../../../assets/Desktop\ -\ 2.png)"
+>
+  <div class="grid gap-12 place-items-center">
+    <p
+      class="p-4 text-6xl font-bold text-center font-poppins"
+    >
+      Login.
+    </p>
+    <form class="flex flex-col gap-6" [formGroup]="loginForm" (ngSubmit)="submit()">
+      <div class="flex flex-col gap-1">
+        <label for="" class="px-2 text-sm">Email</label>
+        <input
+          type="text"
+          class="bg-transparent border-2 rounded-xl w-80"
+          placeholder="email"
+          formControlName="email"
+          matInput
+        />
+        <div *ngIf="email?.errors?.['required'] && isSubmit" class="px-2 text-red-500">
+          *Email is required
+        </div>
+        <div *ngIf="email?.errors?.['email'] && isSubmit" class="px-2 text-red-500">
+          *Email is not valid
+        </div>
+      </div>
+      <div class="relative flex flex-col gap-1">
+        <label for="" class="px-2 text-sm">Password</label>
+        <input
+          type="password"
+          class="bg-transparent border-2 rounded-xl w-80"
+          formControlName="password"
+          placeholder="password"
+          #input
+        />
+
+        <div
+          class="text-[#6b7280] text-xs absolute right-4 top-8"
+          (click)="showPass(input)"
+        >
+          <mat-icon *ngIf="!pass">visibility</mat-icon>
+          <mat-icon *ngIf="pass">visibility_off</mat-icon>
+        </div>
+        <div *ngIf="password?.errors?.['required'] && isSubmit" class="px-2 text-red-500">
+          *password is required
+        </div>
+      </div>
+      <button
+        class="font-poppins w-80 bg-gradient-to-r from-[#b72eb2] via-[#ee5bb3]  to-[#ee77be] h-12 rounded-xl text-xl"
+        type="submit"
+      >
+        Login
+      </button>
+    </form>
+    <div class="grid gap-2 place-items-center">
+    <p class="font-Raleway">don't have an account? <span class="font-bold underline cursor-pointer font-Raleway" routerLink="/sign-up"> Create account </span></p>
+    <p class="font-bold font-Raleway">Forgot password?</p>
+  </div>
+</div>
+</div>

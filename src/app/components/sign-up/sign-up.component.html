@@ -1,0 +1,90 @@
+<div
+  class="grid w-screen h-screen text-white bg-black bg-no-repeat bg-cover place-items-center"
+  style="background: url(../../../assets/Desktop\ -\ 2.png)"
+>
+  <div class="grid gap-8 place-items-center">
+    <p
+      class="p-4 text-6xl font-bold text-center font-poppins"
+    >
+      Sign in.
+    </p>
+      <form class="flex flex-col gap-4" [formGroup]="signUpForm" (ngSubmit)="submit()">
+        <div class="flex flex-col gap-1">
+          <label for="" class="px-2 text-sm">Name</label>
+          <input
+            type="text"
+            class="bg-transparent border-2 rounded-xl w-80"
+            placeholder="name"
+            formControlName="name"
+            matInput
+          />
+
+
+          <div *ngIf="fc?.name?.errors?.['required'] && isSubmit" class="px-2 text-red-500">
+            *name is required
+          </div>
+
+        </div>
+        <div class="flex flex-col gap-1">
+          <label for="" class="px-2 text-sm">Email</label>
+          <input
+            type="text"
+            class="bg-transparent border-2 rounded-xl w-80"
+            placeholder="email"
+            formControlName="email"
+            matInput
+          />
+
+
+          <div *ngIf="fc?.email?.errors?.['required'] && isSubmit" class="px-2 text-red-500">
+            *Email is required
+          </div>
+          <div *ngIf="fc?.email?.errors?.['email'] && isSubmit" class="px-2 text-red-500">
+            *Email is not valid
+          </div>
+        </div>
+        <div class="flex flex-col gap-1">
+          <label for="" class="px-2 text-sm">Password</label>
+          <input
+            type="password"
+            class="bg-transparent border-2 rounded-xl w-80"
+            placeholder="password"
+            formControlName="password"
+            matInput
+          />
+
+
+          <div *ngIf="fc?.password?.errors?.['required'] && isSubmit" class="px-2 text-red-500">
+            *password is required
+          </div>
+
+        </div>
+        <div class="relative flex flex-col gap-1 mb-8">
+          <label for="" class="px-2 text-sm">Conform Password</label>
+          <input
+            type="password"
+            class="bg-transparent border-2 rounded-xl w-80"
+            formControlName="conformPassword"
+            placeholder="conform password"
+            #input
+          />
+
+          <div *ngIf="fc?.password?.errors?.['required'] && isSubmit" class="px-2 text-red-500">
+            *Conform password is required
+          </div>
+          <div *ngIf="signUpForm.errors?.['passwordsDontMatch'] && isSubmit" class="px-2 text-red-500">
+            *Should match the password
+          </div>
+        </div>
+        <button
+          class="font-poppins w-80 bg-gradient-to-r from-[#b72eb2] via-[#ee5bb3]  to-[#ee77be] h-12 rounded-xl text-xl"
+          type="submit"
+        >
+          Sign in
+        </button>
+      </form>
+    <div class="grid gap-2 place-items-center">
+    <p class="font-Raleway">already have an account? <span class="font-bold underline cursor-pointer font-Raleway" routerLink="/"> Login. </span></p>
+  </div>
+</div>
+</div>

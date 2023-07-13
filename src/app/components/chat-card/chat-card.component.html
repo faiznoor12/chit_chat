@@ -1,0 +1,11 @@
+<div class="flex justify-between w-full h-20 p-4 hover:bg-[#1e1f27]" *ngFor="let item of chats">
+
+<div class="flex gap-4">
+  <div class="w-12 h-12 bg-yellow-500 rounded-full"></div>
+<div class="font-bold font-Raleway">
+  <p class="">{{item?.name}}</p>
+  <p class="font-normal text-[#787b9b]">{{item.lastmsg}}</p>
+</div>
+</div>
+<div class="font-Raleway text-[#777a99]">{{item.date}}</div>
+</div>

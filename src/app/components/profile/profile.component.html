@@ -1,0 +1,91 @@
+<div class="grid w-screen h-screen place-items-center bg-[#17181e] text-white overflow-auto">
+  <div
+    class="text-center mat-elevation-z5 w-full h-full lg:w-[50rem] items-center flex flex-col lg:h-fit lg:rounded-2xl bg-white/5 p-6"
+    *ngIf="$user | async as user"
+  >
+    <h1 class="p-6 text-lg font-bold font-Raleway">user profile</h1>
+    <div class="relative mb-8">
+      <div class="object-center overflow-hidden rounded-full w-44 h-44 bg-[]">
+        <img
+          [src]="user.photoURL ?? '../../../assets/placeimg.jpg'"
+          class="object-center"
+          alt=""
+        />
+      </div>
+      <button
+        mat-mini-fab
+        (click)="input.click()"
+        class="absolute bottom-0 right-0"
+        color="primary"
+      >
+        <mat-icon class="mat-18">edit</mat-icon>
+      </button>
+    </div>
+    <input type="file" #input hidden (change)="uploadImage($event, user)" />
+
+    <form
+      class="grid gap-16 mb-16 place-items-center"
+      [formGroup]="profileForm"
+      (ngSubmit)="saveProfile()"
+    >
+      <div class="flex flex-wrap items-center justify-center gap-6">
+        <div class="flex flex-col items-start gap-1">
+          <label for="" class="px-2 text-sm">First Name</label>
+          <input
+            type="text"
+            class="bg-transparent border-2 rounded-xl w-80"
+            placeholder="First Name"
+            formControlName="firstName"
+            matInput
+          />
+        </div>
+        <div class="flex flex-col items-start gap-1">
+          <label for="" class="px-2 text-sm">Last Name</label>
+          <input
+            type="text"
+            class="bg-transparent border-2 rounded-xl w-80"
+            placeholder="Last Name"
+            formControlName="lastName"
+            matInput
+          />
+        </div>
+        <div class="flex flex-col items-start gap-1">
+          <label for="" class="px-2 text-sm">Username</label>
+          <input
+            type="text"
+            class="bg-transparent border-2 rounded-xl w-80"
+            placeholder="Username"
+            formControlName="displayName"
+            matInput
+          />
+        </div>
+        <div class="relative flex flex-col items-start gap-1 ">
+          <label for="" class="px-2 text-sm">Phone</label>
+          <input
+            type="text"
+            class="bg-transparent border-2 rounded-xl w-80"
+            formControlName="phone"
+            placeholder="Phone"
+            #input
+          />
+        </div>
+        <div class="relative flex flex-col items-start gap-1 ">
+          <label for="" class="px-2 text-sm">Address</label>
+          <input
+            type="text"
+            class="bg-transparent border-2 rounded-xl w-80"
+            formControlName="address"
+            placeholder="Address"
+            #input
+          />
+        </div>
+      </div>
+      <button
+        class="font-poppins w-80 bg-gradient-to-r from-[#b72eb2] via-[#ee5bb3] to-[#ee77be] h-12 rounded-xl text-xl"
+        type="submit"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+</div>

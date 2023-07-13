@@ -1,1 +1,79 @@
-<p>home works!</p>
+<div class="w-screen h-screen md:flex">
+  <div
+    class="h-full md:w-full lg:w-2/5 bg-[#1e1f27] md:border-r-[2px] border-[#525151] border-0"
+  >
+    <mat-toolbar class="justify-between bg-[#1e1f27] text-white relative">
+      <p class="text-xl font-poppins">CHIT-CHAT</p>
+      <div
+        class="absolute right-16 top-1 flex items-center justify-center {{
+          search ? 'w-[calc(100%-72px)] bg-[#1e1f27]' : 'w-fit bg-transparent'
+        }} h-16  text-white "
+      >
+        <div class="relative flex items-center justify-center w-full">
+          <input
+            #inp
+            type="text"
+            [formControl]="searchControl"
+            placeholder="Search..."
+            [matAutocomplete]="users"
+            class="{{
+              search ? 'w-full pl-0 border-b-2' : 'w-0'
+            }} p-0 border-0 h-12  transition-all bg-transparent focus:ring-0  border-[#9c27b0] pl-3"
+          />
+          <mat-autocomplete #users="matAutocomplete" class="" >
+            <div *ngIf="inp.value">
+              <mat-option  *ngFor="let users of allUsers$ | async" (click)="createChat(users)" >
+                 {{users?.displayName}}
+              </mat-option>
+            </div>
+          </mat-autocomplete>
+          <button (click)="seachToggle(inp)">
+            <ng-container *ngIf="search; else elseTemplate">
+              <mat-icon>close</mat-icon>
+            </ng-container>
+            <ng-template #elseTemplate class="absolute left-0">
+              <mat-icon>search</mat-icon>
+            </ng-template>
+          </button>
+        </div>
+      </div>
+      <div
+        *ngIf="$user | async as user"
+        class="w-10 h-10 bg-[#A64BC5] rounded-full overflow-hidden"
+        [matMenuTriggerFor]="userMenu"
+      >
+        <img
+          [src]="
+            user.photoURL ??
+            '../../../assets/placeholder-image-dark-400x300.jpg'
+          "
+          alt=""
+        />
+      </div>
+    </mat-toolbar>
+
+    <div class="text-white font-poppins">
+      <mat-tab-group class="p-1 text-white bg-[#1e1f27]" color="primary">
+        <mat-tab label="Chats" class="h-full">
+          <div class="w-full h-[calc(100vh-128px)] bg-[#17181e]">
+            <chat-card [chats]="chats"></chat-card></div
+        ></mat-tab>
+        <mat-tab label="Groups">
+          <div class="w-full h-[calc(100vh-128px)] bg-[#17181e]"></div>
+        </mat-tab>
+        <mat-tab label="Contacts">
+          <div class="w-full h-[calc(100vh-128px)] bg-[#17181e]"></div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+  <div
+    class="h-full md:w-full lg:w-3/5 bg-emerald-600"
+    style="background: url(../../../assets/Frame\ 9.svg)"
+  ></div>
+</div>
+
+<mat-menu #userMenu="matMenu" xPosition="before">
+  <button mat-menu-item routerLink="/profile">Profile</button>
+  <button mat-menu-item (click)="logout()">Logout</button>
+</mat-menu>
